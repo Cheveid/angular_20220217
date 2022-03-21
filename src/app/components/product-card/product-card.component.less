@@ -1,0 +1,53 @@
+:host {
+    padding: 10px;
+    height: calc(100% - 25px);
+    align-self: flex-start;
+    width: 100%;
+}
+
+mat-card {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    padding: 5px;
+}
+
+.mat-card-image {
+    width: 100%;
+}
+
+mat-card-content {
+    flex: 1 1 auto;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+
+.description {
+    display: flex;
+}
+
+mat-icon[color="inactive"] {
+    color:lightgray;
+}
+
+.stars_comments {
+    display: flex;
+    place-content: space-between;
+}
+
+.comments {
+    margin-top: 3px !important;
+}
+
+.price {
+    font-weight: bold;
+}

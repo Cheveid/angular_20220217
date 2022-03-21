@@ -1,0 +1,32 @@
+<mat-card>
+    <div class="image">
+        <img mat-card-image class="card-img" src="{{product.imgsrc}}">
+    </div>
+    <mat-card-content>
+        <div class="description">{{product.name}}</div>
+        <ng-container [ngTemplateOutlet]="stars" [ngTemplateOutletContext]="{rating: product.rating}"></ng-container>
+        <div>
+            <div class="stars_comments">
+                <mat-card-subtitle class="comments">{{product.comments}} отзыва</mat-card-subtitle>
+            </div>
+            <div class="price">
+                {{product.price}}
+            </div>
+        </div>  
+    </mat-card-content>
+</mat-card>
+
+<ng-template #stars let-rating="rating">
+    <div class="stars">
+        <ng-template ngFor let-item [ngForOf]="[1, 2, 3, 4, 5]">
+            <ng-container *ngTemplateOutlet="rating >= item ? starActive : starInactive"></ng-container>
+        </ng-template>
+    </div>
+
+    <ng-template #starActive>
+        <mat-icon color="primary">star</mat-icon>
+    </ng-template>
+    <ng-template #starInactive>
+        <mat-icon color="inactive">star</mat-icon>
+    </ng-template>
+</ng-template>
