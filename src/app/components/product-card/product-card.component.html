@@ -4,9 +4,9 @@
     </div>
     <mat-card-content>
         <div class="description">{{product.name}}</div>
-        <ng-container [ngTemplateOutlet]="stars" [ngTemplateOutletContext]="{rating: product.rating}"></ng-container>
         <div>
             <div class="stars_comments">
+                <ng-container [ngTemplateOutlet]="stars" [ngTemplateOutletContext]="{rating: product.rating}"></ng-container>
                 <mat-card-subtitle class="comments">{{product.comments}} отзыва</mat-card-subtitle>
             </div>
             <div class="price">
