@@ -1,0 +1,12 @@
+<div class="stars">
+    <ng-template ngFor let-item [ngForOf]="[1, 2, 3, 4, 5]">
+        <ng-container *ngTemplateOutlet="rating >= item ? starActive : starInactive"></ng-container>
+    </ng-template>
+</div>
+
+<ng-template #starActive>
+    <mat-icon color="primary">star</mat-icon>
+</ng-template>
+<ng-template #starInactive>
+    <mat-icon color="inactive">star</mat-icon>
+</ng-template>

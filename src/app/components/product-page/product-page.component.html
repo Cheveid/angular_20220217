@@ -1,0 +1,50 @@
+<div class="left-side">
+    <h2>{{ product.name }}</h2>
+    
+    <app-rating-stars [rating]="product.rating"></app-rating-stars>
+    <mat-card-subtitle class="comments">{{product.feedbacksCount}} отзыва</mat-card-subtitle>
+
+    <mat-card>
+        <div class="price">{{ product.price | app_price }}</div>
+        <button mat-flat-button color="primary" class="button-buy">Добавить в корзину</button>
+    </mat-card>
+
+    <div class="image">
+        <img class="card-img" src="{{product.images[0].url}}">
+    </div>
+</div>
+<div class="right-side">
+    <mat-tab-group animationDuration="0ms" dynamicHeight>
+        <mat-tab label="Описание">
+            <div class="tab-content">
+                {{ product.description }}
+            </div>
+        </mat-tab>
+        <mat-tab label="Характеристики">
+            <div class="tab-content">
+                <ng-template ngFor let-characteristic [ngForOf]="product.characteristics">
+                    <b>{{ characteristic.title }}:</b>
+                    <ul>
+                        <ng-template ngFor let-item [ngForOf]="characteristic.items">
+                            <li>
+                                {{ item.name }}: {{ item.value }}
+                            </li>
+                        </ng-template>
+                    </ul>
+                </ng-template>
+            </div>
+        </mat-tab>
+        <mat-tab label="Отзывы ({{product.feedbacksCount}})">
+            <div class="tab-content">
+                <button mat-stroked-button color="primary">Добавить отзыв</button>
+                <ng-template ngFor let-feedback [ngForOf]="product.feedbacks">
+                    <mat-card>
+                        <b>Аноним</b>
+                        <app-rating-stars [rating]="feedback.rate"></app-rating-stars>
+                        {{feedback.advantages}}
+                    </mat-card>
+                </ng-template>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
