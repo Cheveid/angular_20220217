@@ -1,16 +1,20 @@
 <mat-card>
     <div class="image">
-        <img mat-card-image class="card-img" src="{{ product.imgsrc }}">
+        <img mat-card-image class="card-img" [src]="product.images[0].url">
     </div>
     <mat-card-content>
-        <div class="description">{{ product.name }}</div>
+        <div class="description">
+            {{ product.name }}
+        </div>
         <div>
             <div class="stars_comments">
                 <app-rating-stars [rating]="product.rating"></app-rating-stars>
-                <mat-card-subtitle class="comments">Отзывов: {{ product.comments }}</mat-card-subtitle>
+                <mat-card-subtitle class="comments">
+                    Отзывов: {{ product.feedbacksCount }}
+                </mat-card-subtitle>
             </div>
             <div class="price">
-                {{ product.price | app_price }}
+                {{ product.price | appPrice }}
             </div>
         </div>  
     </mat-card-content>
