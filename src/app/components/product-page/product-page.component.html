@@ -17,9 +17,26 @@
         </button>
     </mat-card>
 
-    <div class="image">
-        <img class="card-img" [src]="product.images[0].url">
-    </div>
+    <mat-card class="carousel-card">
+        <mat-card-content>
+            <div *appCarousel="let image of product.images; next as next; back as back; change as change">
+                <div class="carousel-container">
+                    <mat-icon class="carousel-chevron_left" (click)="back()">chevron_left</mat-icon>
+                    <img [src]="image.url" class="carousel-image" />
+                    <mat-icon class="carousel-chevron_right" (click)="next()">chevron_right</mat-icon>
+                </div>
+                
+                <ul class="carousel-list_preview">
+                    <li *ngFor="let img of product.images; let i = index" (click)="change(i)">
+                        <img 
+                            [src]="img.url" 
+                            [ngClass]="{'carousel-image_preview': true, 'active': img.url === image.url}"
+                        />
+                    </li>
+                </ul>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </div>
 <div class="right-side">
     <mat-tab-group animationDuration="0ms" dynamicHeight>

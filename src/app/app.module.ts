@@ -19,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
+import { CarouselDirective } from './directives/carousel.directive';
 
 @NgModule({
 	declarations: [
@@ -30,6 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 		ProductPageComponent,
 		RatingStarsComponent,
 		PricePipe,
+		CarouselDirective,
 	],
 	imports: [
 		BrowserModule,
