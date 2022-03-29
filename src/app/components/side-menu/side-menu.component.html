@@ -1,5 +1,5 @@
 <mat-accordion>
-    <mat-expansion-panel *ngFor="let category of categories; let i = index" expanded="{{ i === 0 }}">
+    <mat-expansion-panel *ngFor="let category of categories; let i = index" [expanded]="i === 0">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 {{ category.name }}
