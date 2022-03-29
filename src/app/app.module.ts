@@ -11,6 +11,11 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { RatingStarsComponent } from './components/rating-stars/rating-stars.component';
 import { PricePipe } from './pipes/price.pipe';
+import { CarouselDirective } from './directives/carousel.directive';
+import { CategoryService } from './services/category.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProductService } from './services/product.service';
+import { BaseInterceptor } from './services/base.interceptor';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,7 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
-import { CarouselDirective } from './directives/carousel.directive';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
 	declarations: [
@@ -44,8 +49,18 @@ import { CarouselDirective } from './directives/carousel.directive';
 		MatGridListModule,
 		MatExpansionModule,
 		MatTabsModule,
+		MatProgressSpinnerModule,
+		HttpClientModule,
 	],
-	providers: [],
+	providers: [
+		CategoryService,
+		ProductService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: BaseInterceptor,
+			multi: true,
+		},
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

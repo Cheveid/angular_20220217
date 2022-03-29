@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/interfaces/category';
-import { categories } from 'src/app/mocks/categories.mock';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
 	selector: 'app-side-menu',
@@ -8,6 +9,12 @@ import { categories } from 'src/app/mocks/categories.mock';
 	styleUrls: ['./side-menu.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SideMenuComponent {
-	public readonly categories: ICategory[] = categories;
+export class SideMenuComponent implements OnInit {
+	constructor(@Inject(CategoryService) private categoryService: CategoryService) {}
+
+	public categories$!: Observable<ICategory[]>;
+
+	ngOnInit(): void {
+		this.categories$ = this.categoryService.getCategories$();
+	}
 }
