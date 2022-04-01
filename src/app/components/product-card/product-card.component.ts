@@ -1,16 +1,13 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { IProduct } from 'src/app/interfaces/product';
 
 @Component({
-    selector: 'app-product-card',
-    templateUrl: './product-card.component.html',
-    styleUrls: ['./product-card.component.less']
+	selector: 'app-product-card',
+	templateUrl: './product-card.component.html',
+	styleUrls: ['./product-card.component.less'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductCardComponent implements OnInit {
-    @Input()
-    product: any = {};
-    
-    constructor() { }
-
-    ngOnInit(): void {
-    }
+export class ProductCardComponent {
+	@Input()
+	product!: IProduct;
 }

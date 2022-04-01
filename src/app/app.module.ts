@@ -19,31 +19,33 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
+import { CarouselDirective } from './directives/carousel.directive';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        ProductCardComponent,
-        ProductTableComponent,
-        SideMenuComponent,
-        ProductPageComponent,
-        RatingStarsComponent,
-        PricePipe,
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        MatCardModule,
-        MatGridListModule,
-        MatExpansionModule,
-        MatTabsModule,
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HeaderComponent,
+		ProductCardComponent,
+		ProductTableComponent,
+		SideMenuComponent,
+		ProductPageComponent,
+		RatingStarsComponent,
+		PricePipe,
+		CarouselDirective,
+	],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		AppRoutingModule,
+		MatToolbarModule,
+		MatIconModule,
+		MatButtonModule,
+		MatCardModule,
+		MatGridListModule,
+		MatExpansionModule,
+		MatTabsModule,
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

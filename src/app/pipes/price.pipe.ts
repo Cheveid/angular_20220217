@@ -1,24 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'app_price'
+	name: 'appPrice',
 })
 export class PricePipe implements PipeTransform {
-    private defaultLocale: string = "ru-RU";
-    private defaultCurrency: string = "RUB";
-
-    transform(value: number, currency?: string | undefined, locale?: string | undefined, fractionDigits: number = 0): string {
-        try {
-            let format = Intl.NumberFormat(locale ?? this.defaultLocale, { 
-                style: "currency", 
-                currency: currency ?? this.defaultCurrency, 
-                currencyDisplay: "symbol", 
-                minimumFractionDigits: fractionDigits
-            });
-            return format.format(value);
-        }
-        catch {
-            return "";
-        }
-    }
+	transform(
+		value: number,
+		currency: string = 'RUB',
+		locale: string = 'ru-RU',
+		fractionDigits: number = 0,
+	): string {
+		const format = Intl.NumberFormat(locale, {
+			style: 'currency',
+			currency: currency,
+			currencyDisplay: 'symbol',
+			minimumFractionDigits: fractionDigits,
+		});
+		return format.format(value);
+	}
 }

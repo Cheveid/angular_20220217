@@ -1,23 +1,17 @@
 <mat-accordion>
-    <ng-template ngFor let-category [ngForOf]="categories" let-i="index">
-        <mat-expansion-panel expanded="{{ i == 0 }}">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    {{ category.name }}
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ul>
-                <ng-template ngFor let-subCategory [ngForOf]="category.subCategories">
-                    <ng-container [ngTemplateOutlet]="itemSubCategory" [ngTemplateOutletContext]="{ subcategory: subCategory }"></ng-container>
-                </ng-template>
-            </ul>
-        </mat-expansion-panel>
-    </ng-template>
+    <mat-expansion-panel *ngFor="let category of categories; let i = index" [expanded]="i === 0">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ category.name }}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+            <li *ngFor="let subCategory of category.subCategories">
+                <mat-icon>arrow_right</mat-icon>
+                <a [href]="subCategory._id">
+                    {{ subCategory.name }}
+                </a>
+            </li>
+        </ul>
+    </mat-expansion-panel>
 </mat-accordion>
-
-<ng-template #itemSubCategory let-subcategory="subcategory">
-    <li>
-        <mat-icon>arrow_right</mat-icon>
-        <a href="{{ subcategory._id }}">{{ subcategory.name }}</a>
-    </li>
-</ng-template>
