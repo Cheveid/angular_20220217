@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
@@ -10,7 +10,7 @@ import { CategoryService } from 'src/app/services/category.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideMenuComponent implements OnInit {
-	constructor(@Inject(CategoryService) private categoryService: CategoryService) {}
+	constructor(private categoryService: CategoryService) {}
 
 	public categories$!: Observable<ICategory[]>;
 
