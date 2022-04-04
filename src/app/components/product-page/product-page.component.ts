@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IProductInfo } from 'src/app/interfaces/product-info';
-import { productInfo } from 'src/app/mocks/product-info.mock';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
 	selector: 'app-product-page',
@@ -8,6 +9,14 @@ import { productInfo } from 'src/app/mocks/product-info.mock';
 	styleUrls: ['./product-page.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductPageComponent {
-	public readonly product: IProductInfo = productInfo;
+export class ProductPageComponent implements OnInit {
+	constructor(private productService: ProductService) {}
+
+	public product$!: Observable<IProductInfo>;
+
+	private id: string = 'kompaktnaa-mys-besprovodnaa-defender-1-mm-605-krasnyj';
+
+	ngOnInit(): void {
+		this.product$ = this.productService.getProduct$(this.id);
+	}
 }
