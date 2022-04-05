@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProductInfo } from 'src/app/interfaces/product-info';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
 	selector: 'app-product-page',
-	templateUrl: './product-page.component.html',
-	styleUrls: ['./product-page.component.less'],
+	templateUrl: './product.component.html',
+	styleUrls: ['./product.component.less'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductPageComponent implements OnInit {
-	constructor(@Inject(ProductService) private productService: ProductService) {}
+export class ProductComponent implements OnInit {
+	constructor(private productService: ProductService) {}
 
 	public product$!: Observable<IProductInfo>;
 

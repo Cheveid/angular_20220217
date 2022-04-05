@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProduct } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductTableComponent implements OnInit {
-	constructor(@Inject(ProductService) private productService: ProductService) {}
+	constructor(private productService: ProductService) {}
 
 	public products$!: Observable<IProduct[]>;
 

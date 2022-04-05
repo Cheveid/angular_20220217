@@ -1,5 +1,5 @@
 <mat-accordion>
-    <ng-container *ngIf="categories$ | async as categories; else spinner">
+    <ng-container *ngIf="(categories$ | async) as categories; else spinner">
         <mat-expansion-panel *ngFor="let category of categories; let i = index" [expanded]="i === 0">
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -8,8 +8,8 @@
             </mat-expansion-panel-header>
             <ul>
                 <li *ngFor="let subCategory of category.subCategories">
-                    <mat-icon>arrow_right</mat-icon>
-                    <a [href]="subCategory._id">
+                    <mat-icon color="primary">arrow_right</mat-icon>
+                    <a (click)="onClick(subCategory._id)">
                         {{ subCategory.name }}
                     </a>
                 </li>
