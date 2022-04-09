@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryModule } from './pages/category/category.module';
-import { ProductModule } from './pages/product/product.module';
-import { ProductsListModule } from './pages/products-list/products-list.module';
 
 const routes: Routes = [
 	{
@@ -11,6 +8,7 @@ const routes: Routes = [
 			import('src/app/pages/products-list/products-list.module').then(
 				(m) => m.ProductsListModule,
 			),
+		pathMatch: 'full',
 	},
 	{
 		path: 'product',
@@ -25,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes), ProductsListModule, ProductModule, CategoryModule],
+	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -1,28 +1,29 @@
 <div class="left-menu">
-    <app-side-menu (subCategorySelect)="onSubCategorySelect($event)"></app-side-menu>
+    <form [formGroup]="form">
+        <app-side-menu (subCategorySelect)="onSubCategorySelect($event)"></app-side-menu>
 
-    <h3 class="filters_caption">Фильтры по товарам</h3>
-        
-    <mat-label class="filter_label">Наименование</mat-label>
-    <mat-form-field class="full-width" appearance="fill">
-        <input matInput (keyup)="onTextChange($event)">
-    </mat-form-field>
-    
-    <mat-label class="filter_label">Бренд</mat-label>
-    <div class="filter_brand">
-        <ul *ngIf="(brands$ | async) as brands; else spinner" class="filter_brand-list">
-            <li *ngFor="let brand of brands">
-                <mat-checkbox 
-                    color="primary" 
-                    class="filter_brand-list-item" 
-                    (change)="onBrandChange($event)" 
-                    [value]="brand"
-                >
-                    {{ brand }}
-                </mat-checkbox>
-            </li>
-        </ul>
-    </div>
+        <h3 class="filters_caption">Фильтры по товарам</h3>
+            
+        <mat-label class="filter_label">Наименование</mat-label>
+        <mat-form-field class="full-width" appearance="fill">
+            <input matInput formControlName="textControl">
+        </mat-form-field>
+
+        <mat-label class="filter_label">Бренд</mat-label>
+        <div class="filter_brand">
+            <ul *ngIf="(brands$ | async) as brands; else spinner" class="filter_brand-list" formGroupName="brandsControl">
+                <li *ngFor="let brand of brands">
+                    <mat-checkbox 
+                        color="primary" 
+                        class="filter_brand-list-item" 
+                        [formControlName]="brand"
+                    >
+                        {{ brand }}
+                    </mat-checkbox>
+                </li>
+            </ul>
+        </div>
+    </form>
 </div>
 <div class="content">
     <ng-container *ngIf="(products$ | async) as products; else spinner">

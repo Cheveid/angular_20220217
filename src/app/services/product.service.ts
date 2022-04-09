@@ -22,13 +22,14 @@ export class ProductService {
 	}
 
 	getProductsByFilter$(filter: IProductFilter): Observable<IProduct[]> {
-		let sFilter = Object.entries(filter)
-			.filter((value) => value[1])
-			.map(([key, value]) => `${key}=${value}`)
-			.join('&');
+		let params = Object.fromEntries(
+			Object.entries(filter)
+				.filter((value) => value[1])
+				.map(([key, value]) => [key, value]),
+		);
 
 		return this.http
-			.get<{ data: { items: IProduct[] } }>(`/products/?${sFilter}`)
+			.get<{ data: { items: IProduct[] } }>('/products', { params: params })
 			.pipe(map((data) => data.data.items));
 	}
 }

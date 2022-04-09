@@ -15,7 +15,6 @@ export class SideMenuComponent implements OnInit {
 	@Output() subCategorySelect = new EventEmitter<string>();
 
 	public categories$!: Observable<ICategory[]>;
-	public selectedSubCategoryId: string = '';
 
 	ngOnInit(): void {
 		this.categories$ = this.categoryService.getCategories$();
