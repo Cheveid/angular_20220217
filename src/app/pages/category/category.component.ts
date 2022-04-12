@@ -13,7 +13,6 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class CategoryComponent implements OnInit, AfterViewInit {
 	private subCat$ = new BehaviorSubject<string>('avtoelektronika-i-protivougonnye-sistemy');
-	private selectedBrands$ = new BehaviorSubject<string>('');
 	form = this.formBuilder.group({
 		textControl: [''],
 		brandsControl: this.formBuilder.group([]),
@@ -30,15 +29,17 @@ export class CategoryComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 		this.products$ = combineLatest([
-			this.subCat$.asObservable(),
 			this.form.get('textControl')?.valueChanges as Observable<string>,
-			this.selectedBrands$.asObservable(),
+			this.form.get('brandsControl')?.valueChanges as Observable<{}>,
 		]).pipe(
-			switchMap(([subCat, text, brands]) =>
+			switchMap(([text, objBrands]) =>
 				this.productService.getProductsByFilter$({
-					subCat: subCat,
+					subCat: this.subCat$.value,
 					text: text,
-					brands: brands,
+					brands: Object.entries(objBrands)
+						.filter((brand) => brand[1])
+						.map((brand) => brand[0])
+						.join(','),
 				}),
 			),
 		);
@@ -46,17 +47,18 @@ export class CategoryComponent implements OnInit, AfterViewInit {
 		this.brands$ = this.subCat$.pipe(
 			switchMap((subCat) => this.brandService.getBrands$(subCat)),
 			tap((brands) => {
-				brands.forEach((brand) => {
-					const brandsControl = this.form.get('brandsControl') as FormGroup;
-					brandsControl.addControl(brand, this.formBuilder.control(false));
-				});
-				this.form.get('brandsControl')?.valueChanges.subscribe((objBrands) => {
-					this.selectedBrands$.next(
-						Object.entries(objBrands)
-							.filter((brand) => brand[1])
-							.map((brand) => brand[0])
-							.join(','),
-					);
+				const brandsControl = this.form.get('brandsControl') as FormGroup;
+
+				Object.keys(brandsControl.controls).forEach((key) =>
+					brandsControl.removeControl(key, {
+						emitEvent: false,
+					}),
+				);
+
+				brands.forEach((brand, index) => {
+					brandsControl.addControl(brand, this.formBuilder.control(false), {
+						emitEvent: index === brands.length - 1,
+					});
 				});
 			}),
 		);

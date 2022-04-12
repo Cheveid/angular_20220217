@@ -22,11 +22,7 @@ export class ProductService {
 	}
 
 	getProductsByFilter$(filter: IProductFilter): Observable<IProduct[]> {
-		let params = Object.fromEntries(
-			Object.entries(filter)
-				.filter((value) => value[1])
-				.map(([key, value]) => [key, value]),
-		);
+		const params = Object.fromEntries(Object.entries(filter).filter((value) => value[1]));
 
 		return this.http
 			.get<{ data: { items: IProduct[] } }>('/products', { params: params })
