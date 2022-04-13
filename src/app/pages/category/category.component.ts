@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, combineLatest, Observable, switchMap, tap } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { BehaviorSubject, combineLatest, Observable, Subject, switchMap, tap } from 'rxjs';
 import { IProduct } from 'src/app/interfaces/product';
 import { BrandService } from 'src/app/services/brand.service';
 import { ProductService } from 'src/app/services/product.service';
+import { BrandsToString } from 'src/app/pages/category/utils';
 
 @Component({
 	selector: 'app-category',
@@ -21,6 +22,8 @@ export class CategoryComponent implements OnInit, AfterViewInit {
 	public brands$!: Observable<string[]>;
 	public products$!: Observable<IProduct[]>;
 
+	private brandsChanges$ = new Subject<{}>();
+
 	constructor(
 		private productService: ProductService,
 		private brandService: BrandService,
@@ -30,16 +33,13 @@ export class CategoryComponent implements OnInit, AfterViewInit {
 	ngOnInit(): void {
 		this.products$ = combineLatest([
 			this.form.get('textControl')?.valueChanges as Observable<string>,
-			this.form.get('brandsControl')?.valueChanges as Observable<{}>,
+			this.brandsChanges$,
 		]).pipe(
 			switchMap(([text, objBrands]) =>
 				this.productService.getProductsByFilter$({
 					subCat: this.subCat$.value,
 					text: text,
-					brands: Object.entries(objBrands)
-						.filter((brand) => brand[1])
-						.map((brand) => brand[0])
-						.join(','),
+					brands: BrandsToString(objBrands),
 				}),
 			),
 		);
@@ -47,19 +47,22 @@ export class CategoryComponent implements OnInit, AfterViewInit {
 		this.brands$ = this.subCat$.pipe(
 			switchMap((subCat) => this.brandService.getBrands$(subCat)),
 			tap((brands) => {
-				const brandsControl = this.form.get('brandsControl') as FormGroup;
-
-				Object.keys(brandsControl.controls).forEach((key) =>
-					brandsControl.removeControl(key, {
-						emitEvent: false,
-					}),
+				this.form.setControl(
+					'brandsControl',
+					this.formBuilder.group(
+						brands.reduce(
+							(accumBrands, brand) => ({
+								...accumBrands,
+								[brand]: this.formBuilder.control(false),
+							}),
+							[],
+						),
+					),
 				);
 
-				brands.forEach((brand, index) => {
-					brandsControl.addControl(brand, this.formBuilder.control(false), {
-						emitEvent: index === brands.length - 1,
-					});
-				});
+				this.form.get('brandsControl')?.valueChanges.subscribe(this.brandsChanges$);
+
+				this.form.get('brandsControl')?.updateValueAndValidity();
 			}),
 		);
 	}
