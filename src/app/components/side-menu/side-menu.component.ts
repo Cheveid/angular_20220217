@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICategory } from 'src/app/interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
@@ -12,9 +12,15 @@ import { CategoryService } from 'src/app/services/category.service';
 export class SideMenuComponent implements OnInit {
 	constructor(private categoryService: CategoryService) {}
 
+	@Output() subCategorySelect = new EventEmitter<string>();
+
 	public categories$!: Observable<ICategory[]>;
 
 	ngOnInit(): void {
 		this.categories$ = this.categoryService.getCategories$();
+	}
+
+	onClick(subCategoryId: string) {
+		this.subCategorySelect.emit(subCategoryId);
 	}
 }

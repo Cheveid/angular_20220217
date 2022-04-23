@@ -1,0 +1,108 @@
+:host {
+    display: flex;
+}
+
+.left-menu {
+    display: flex;
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 10px 10px 0px 0px;
+}
+
+.content {
+    display: flex;
+    flex: 0 0 75%;
+    max-width: 75%;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.carousel-container {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 250px;
+    margin: 10px;
+    background-color: aqua;
+    position: relative;
+}
+
+.carousel-image {
+    mix-blend-mode: darken;
+    position: absolute;
+    bottom: 0;
+    max-height: 100%;
+}
+
+.carousel-caption {
+    position: absolute;
+    left: 5rem;
+    top: 4rem;
+    max-width: 45%;
+}
+
+h1 {
+    font-size: 2.0rem;
+    font-weight: bold;
+}
+
+.carousel-button {
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.carousel-button mat-icon {
+    font-size: 1.4rem;
+}
+
+.carousel-chevron_left {
+    position: absolute;
+    left: 10px;
+    top: calc(50% - 22px);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.carousel-chevron_right {
+    position: absolute;
+    left: calc(100% - 54px);
+    top: calc(50% - 22px);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.carousel-list_indicator {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.carousel-indicator {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-radius: 25%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.carousel-indicator.active {
+    background-color: #fff;
+    background-clip: padding-box;
+}
+
+.table-caption {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-left: 10px;
+}

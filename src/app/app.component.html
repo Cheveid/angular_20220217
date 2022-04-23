@@ -1,37 +1,6 @@
 <app-header></app-header>
 <div class="main">
     <div class="container">
-        <!-- <app-product-page></app-product-page> -->
-        <div class="left-menu">
-            <app-side-menu></app-side-menu>
-        </div>
-        <div class="content">
-            <div 
-                *appCarousel="let item of carouselData; next as next; back as back; change as change"
-                class="carousel-container"
-            >
-                <mat-icon class="carousel-chevron_left" (click)="back()">chevron_left</mat-icon>
-                <img [src]="item.imgUrl" class="carousel-image" />
-                <div class="carousel-caption">
-                    <h1>{{ item.caption }}</h1>
-                    <button mat-flat-button color="primary" class="carousel-button">
-                        Посмотреть предложения
-                        <mat-icon>chevron_right</mat-icon>
-                    </button>
-                </div>
-                <mat-icon class="carousel-chevron_right" (click)="next()">chevron_right</mat-icon>
-
-                <ul class="carousel-list_indicator">
-                    <li 
-                        *ngFor="let indicator of carouselData; let i = index" 
-                        class="carousel-indicator" 
-                        [class.active]="indicator._id === item._id"
-                        (click)="change(i)"
-                    >
-                    </li>
-                </ul>
-            </div>
-            <app-product-table></app-product-table>
-        </div>
+        <router-outlet></router-outlet>
     </div>
 </div>

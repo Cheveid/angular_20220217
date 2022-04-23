@@ -8,8 +8,8 @@
             </mat-expansion-panel-header>
             <ul>
                 <li *ngFor="let subCategory of category.subCategories">
-                    <mat-icon>arrow_right</mat-icon>
-                    <a [href]="subCategory._id">
+                    <mat-icon color="primary">arrow_right</mat-icon>
+                    <a (click)="onClick(subCategory._id)">
                         {{ subCategory.name }}
                     </a>
                 </li>
