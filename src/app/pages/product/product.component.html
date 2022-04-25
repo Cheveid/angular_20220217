@@ -1,4 +1,4 @@
-<ng-container *ngIf="(product$ |async) as product; else spinner">
+<ng-container *ngIf="(product$ | async) as product; else spinner">
     <div class="left-side">
         <h2>
             {{ product.name }}
