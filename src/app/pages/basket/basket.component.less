@@ -3,39 +3,10 @@
 }
 
 .left-menu {
+    display: flex;
     flex: 0 0 25%;
     max-width: 25%;
-    padding: 10px 10px 0px 0px;
-}
-
-.filters_caption {
-    margin-top: 20px;
-    font-weight: 400;
-    font-size: 1.2rem;
-}
-
-.filter_label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.filter_brand {
-    height: 200px;
-    overflow: auto;
-}
-
-.filter_brand-list {
-    padding-left: 0;
-    margin-top: 0;
-    list-style-type: none;
-}
-
-.filter_brand-list-item {
-    margin-bottom: 5px;
-}
-
-.full-width {
-    width: 100%;
+    padding: 10px 0px 0px 10px;
 }
 
 .content {
@@ -45,6 +16,7 @@
     flex-direction: column;
     padding-top: 10px;
 }
+
 
 .card {
     display: flex;
@@ -57,6 +29,7 @@
     flex: 0 0 100px;
     padding: 1.5rem;
     background-color: aqua;
+    justify-content: center;
 }
 
 .card_image-img {
@@ -66,13 +39,23 @@
 }
 
 .card_description {
-    flex: 0 0 calc(66% - 100px);
+    flex: 0 0 calc(50% - 100px);
     padding: 1rem;
+    box-sizing: border-box;
 }
 
-.card_price {
-    flex: 0 0 calc(33% - 100px);
+.card_count {
+    align-self: center;    
+    flex: 0 0 calc(20% - 100px);
+    box-sizing: border-box;
+}
+
+.card_total {
+    display: flex;
+    align-self: center;    
+    flex: 0 0 calc(30% - 100px);
     padding: 1rem;
+    box-sizing: border-box;
 }
 
 .link {

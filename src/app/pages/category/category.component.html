@@ -32,7 +32,7 @@
                 <img class="card_image-img" [src]="product.images[0].url">
             </div>
             <div class="card_description">
-                <h3>{{ product.name }}</h3>
+                <h3 [routerLink]="'/product/' + product._id" class="link">{{ product.name }}</h3>
                 <app-rating-stars [rating]="product.rating"></app-rating-stars>
                 <mat-card-subtitle class="comments">
                     Отзывов: {{ product.feedbacksCount }}
@@ -40,7 +40,7 @@
             </div>
             <div class="card_price">
                 <h3>{{ product.price | appPrice }}</h3>
-                <button mat-stroked-button color="primary">Добавить в корзину</button>
+                <button mat-stroked-button color="primary" (click)="onAddProductToBasket($event, product)">Добавить в корзину</button>
             </div>  
         </mat-card>
     </ng-container>

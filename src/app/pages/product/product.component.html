@@ -13,7 +13,7 @@
             <div class="price">
                 {{ product.price | appPrice }}
             </div>
-            <button mat-flat-button color="primary" class="button-buy">
+            <button mat-flat-button color="primary" class="button-buy" (click)="onAddProductToBasket($event, product)">
                 Добавить в корзину
             </button>
         </mat-card>

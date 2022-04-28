@@ -1,0 +1,32 @@
+<div class="content">
+    <ng-container *ngIf="(basket$ | async) as basket; else spinner">
+        <mat-card *ngFor="let basketItem of basket" class="card">
+            <div class="card_image">
+                <img class="card_image-img" [src]="basketItem.Product.images[0].url">
+            </div>
+            <div class="card_description">
+                <h3 [routerLink]="'/product/' + basketItem.Product._id" class="link">{{ basketItem.Product.name }}</h3>
+                <app-rating-stars [rating]="basketItem.Product.rating"></app-rating-stars>
+                <mat-card-subtitle class="comments">
+                    Отзывов: {{ basketItem.Product.feedbacksCount }}
+                </mat-card-subtitle>
+            </div>
+            <div class="card_count">
+                <mat-label class="filter_label">Кол-во</mat-label>
+                <mat-form-field class="full-width" appearance="fill">
+                    <input type="number" matInput [value]="basketItem.Count">
+                </mat-form-field>
+            </div>  
+            <div class="card_total">
+                <h1>{{ basketItem.Product.price | appPrice }}</h1>
+            </div>  
+        </mat-card>
+    </ng-container>
+</div>
+<div class="left-menu">
+    Форма адреса
+</div>
+
+<ng-template #spinner>
+    <mat-spinner color="accent" diameter="50"></mat-spinner>
+</ng-template>

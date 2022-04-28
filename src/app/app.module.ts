@@ -14,6 +14,8 @@ import { BrandService } from './services/brand.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { NotFoundModule } from './pages/not-found/not-found.module';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
 	declarations: [AppComponent, HeaderComponent],
@@ -25,6 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
 		MatIconModule,
 		MatButtonModule,
 		HttpClientModule,
+		NotFoundModule,
+		MatBadgeModule,
 	],
 	providers: [
 		CategoryService,
