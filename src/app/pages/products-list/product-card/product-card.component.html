@@ -3,7 +3,7 @@
         <img mat-card-image class="card-img" [src]="product.images[0].url">
     </div>
     <mat-card-content>
-        <div class="description">
+        <div class="description" [routerLink]="'/product/' + product._id">
             {{ product.name }}
         </div>
         <div>
@@ -14,7 +14,8 @@
                 </mat-card-subtitle>
             </div>
             <div class="price">
-                {{ product.price | appPrice }}
+                <div>{{ product.price | appPrice }}</div>
+                <button mat-stroked-button color="primary" (click)="onAddProductToBasket($event)">Добавить в корзину</button>
             </div>
         </div>  
     </mat-card-content>
